@@ -31,4 +31,5 @@
 
 参考资料
 
+- [nginx docs](https://devdocs.io/nginx)
 - [curl: Name resolve tricks](https://everything.curl.dev/usingcurl/connections/name) curl offers many ways to make it use another host than the one it normally would connect to.
