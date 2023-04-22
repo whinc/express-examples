@@ -12,6 +12,9 @@
     - nginx.conf # nginx 配置文件
 ```
 
+nginx 配置参考（带注释）
+- [conf.d/example.com](./volumn/conf.d/example.com.conf)
+
 ## 脚本
 
 ```bash
