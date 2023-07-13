@@ -1,0 +1,14 @@
+{
+    "name": "demos",
+    "version": "1.0.0",
+    "description": "",
+    "main": "sub-router.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "express": "file:///data/projects/nodejs-examples/express/express"
+    },
+    "author": "",
+    "license": "ISC"
+}

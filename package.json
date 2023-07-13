@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@types/node": "^16.18.29",
+    "eslint": "^8.42.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
