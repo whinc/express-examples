@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "nodejs-examples/nest/demos/hello-world",
+            "request": "launch",
+            "runtimeArgs": [
+                "run",
+                "start"
+            ],
+            "cwd": "${workspaceFolder}/nest/demos/hello-world",
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
             "name": "Launch Program",
             "program": "${workspaceFolder}/express/demos/sub-router.js",
             "request": "launch",
