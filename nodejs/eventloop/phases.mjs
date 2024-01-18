@@ -1,7 +1,7 @@
 // 验证事件循环的执行阶段：Mainline -> Timers -> Pending -> Idle,Prepare -> Poll IO -> Check -> Close -> Timers(循环)
 // 注意：setTimeout/setInterval 的 delay 最小间隔为 4ms，即 <= 4ms 都是立即执行，等价于 0ms
 
-const { readFile } = require("fs");
+import { readFile } from "node:fs";
 
 // 下面等同于 MIN_DELAY = 0
 // const MIN_DELAY = 4;
@@ -9,26 +9,34 @@ const MIN_DELAY = 5;
 setTimeout(() => {
   console.log("setTimeout delay 0 (Timers phase)");
   queueMicrotask(() =>
-    console.log("queueMicrotask in setTimeout delay 0 (Timers phase)"),
+    console.log(
+      "queueMicrotask in setTimeout delay 0 (Timers phase microtask)",
+    ),
   );
 });
 setTimeout(
   () => console.log(`setTimeout delay ${MIN_DELAY} (Timers phase)`),
   MIN_DELAY,
 );
+
 setImmediate(() => {
-  console.log("setImmediate (Check phase)");
+  console.log(
+    "setImmediate (Check phase) <-- (首次进入循环，从 Check phase 开始执行???)",
+  );
   queueMicrotask(() =>
-    console.log("queueMicrotask in setImmediate (Check phase)"),
+    console.log("queueMicrotask in setImmediate (Check phase microtask)"),
   );
 });
 
 let count = 0;
 const timerId = setInterval(() => {
-  if (count === 0)
-    console.log(`setInterval delay ${MIN_DELAY}, ${count}th (Timers phase)`);
-  else {
-    console.log(`setInterval delay ${MIN_DELAY}, ${count}th (Timers phase)`);
+  console.log(`setInterval delay ${MIN_DELAY}, ${count}th (Timers phase)`);
+  queueMicrotask(() =>
+    console.log(
+      `queueMicrotask in setInterval delay ${MIN_DELAY}, ${count}th (Timers phase microtask)`,
+    ),
+  );
+  if (count === 1) {
     clearInterval(timerId);
     return;
   }
@@ -46,4 +54,4 @@ process.nextTick(() =>
 readFile("./demo1.js", (err, data) => {
   console.log("readFile (Poll IO phase)");
 });
-console.log("main");
+console.log("main (mainline)");
